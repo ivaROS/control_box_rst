@@ -59,7 +59,7 @@ elseif(UNIX OR MINGW)
     if(IPOPT_DIR_TEST)
         set(IPOPT_DIR $ENV{IPOPT_DIR} CACHE PATH "Path to IPOPT build directory")
     else()
-	find_path (IPOPT_DIR /include/coin/IpTNLP.hpp PATHS /usr [/usr/local])
+	find_path (IPOPT_DIR /include/coin/IpTNLP.hpp PATHS /usr )
         #set(IPOPT_DIR /usr            CACHE PATH "Path to IPOPT build directory")
     endif()
 
@@ -67,10 +67,11 @@ elseif(UNIX OR MINGW)
     find_library(IPOPT_LIBRARIES ipopt ${IPOPT_DIR}/lib
                                        ${IPOPT_DIR}/lib/coin
                                        NO_DEFAULT_PATH)
-									  
+                                       
     if(IPOPT_LIBRARIES)
         find_file(IPOPT_DEP_FILE ipopt_addlibs_cpp.txt ${IPOPT_DIR}/share/doc/coin/Ipopt
                                                        ${IPOPT_DIR}/share/coin/doc/Ipopt
+                                                       ${IPOPT_DIR}/share/doc/ipopt
                                                        NO_DEFAULT_PATH)
         mark_as_advanced(IPOPT_DEP_FILE)
 
